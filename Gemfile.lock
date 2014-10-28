@@ -60,6 +60,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    fancybox2-rails (0.2.8)
+      railties (>= 3.1.0, < 5.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -203,6 +205,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.0.0)
   factory_girl_rails
+  fancybox2-rails (~> 0.2.8)
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails

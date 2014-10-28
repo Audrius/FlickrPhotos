@@ -51,3 +51,4 @@ gem 'rails_best_practices'
 gem 'quiet_assets', group: :development
 gem 'rails_12factor', group: :production
 gem "rails-settings-cached", "0.4.1"
+gem 'fancybox2-rails', '~> 0.2.8'

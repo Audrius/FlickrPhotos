@@ -1,33 +1,32 @@
 .container
   .row
     .col-md-4.col-md-offset-4
-      = form_tag '/search_photos', class: "form-horizontal" do
+      = form_tag '/search_photos', method: :get, class: "form-horizontal" do
         %fieldset
           %legend The Simple Search For Flickr Photos
           .form-group
             .col-md-12
-              %input#textinput.form-control.input-md{:name => "search_params", :placeholder => "Write here - e.g kitty or default search is 'kitty'...", :type => "text"}
+              %input#textinput.form-control.input-md{:name => "search_params", :placeholder => "Write here - e.g kitty or default search is 'kitty'...", :type => "text", value: "#{@search_value}"}
           .form-group
-            .col-md-12
+            .col-md-6
               %button#singlebutton.btn-primaryn.btn-primary{:name => "singlebutton", type: "submit"}
                 Give me some photos!!!
-      %ul.pagination
-        %li.disabled
-          %a{:href => "#"} &laquo;
-        %li.active
-          %a{:href => "#"} 
-            1
-            %span.sr-only (current)
-        %li
-          %a{:href => "#"} 2
-        %li
-          %a{:href => "#"} 3
-
+      
+  - if @total_photos > 0
+    .row.text-center
+      %ul.pagination.pagination-sm
+        - (@page_from).upto(@page_to) do | page |
+          - if @current_page == page
+            %li.active
+              = link_to page, params.slice(:sort).merge(page: page).merge(search_params: @search_value)
+          - else
+            %li
+              = link_to page, params.slice(:sort).merge(page: page).merge(search_params: @search_value)
 - if @photos
   .row
     .col-lg-8.col-lg-offset-2
       - @photos.each do |photo|
         .col-lg-2.col-sm-4.col-xs-12
-          %a{:href => "#"}
-            %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
+          %a.fancybox{:data => {'fancybox-href' => "#{get_photo_url(photo, 'z')}"} }
+            %img.thumbnail.img-responsive{src: "#{get_photo_url(photo, 'q')}", }
   
