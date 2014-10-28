@@ -11,7 +11,7 @@
           %tbody
             %tr
               %td Photos per page
-              %td= text_field_tag :photos_per_page, SearchSettings.photos_per_page, class: "input-large"
+              %td= text_field_tag :per_page, SearchSettings.per_page, class: "input-large"
             %tr
               %td Privacy filter (1 - public)
               %td= text_field_tag :privacy_filter, SearchSettings.privacy_filter, class: "input-large"
@@ -23,5 +23,6 @@
               %td= text_field_tag :content_type, SearchSettings.content_type, class: "input-large"
 
         = submit_tag "Save", class: 'btn btn-primary btn-md'
+        = link_to "Back", :root, class: 'btn btn-default btn-md'
         - if flash[:settings_saved]
           = content_tag :div, flash[:settings_saved], style:"color:green"
