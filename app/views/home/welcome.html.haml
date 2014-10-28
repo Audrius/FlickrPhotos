@@ -1,19 +1,32 @@
-= form_tag '/search_photos', class: "form-horizontal" do
-  %fieldset
-    %legend Search Flickr Photos - The Test API!
-    .form-group
-      .col-md-4
-        %input#textinput.form-control.input-md{:name => "search_params", :placeholder => "Example - kitty", :type => "text"}
-    .form-group
-      .col-md-4
-        %button#singlebutton.btn.btn-primary{:name => "singlebutton", type: "submit"} Button
-
+.container
+  .row
+    .col-md-4.col-md-offset-4
+      = form_tag '/search_photos', class: "form-horizontal" do
+        %fieldset
+          %legend The Simple Search For Flickr Photos
+          .form-group
+            .col-md-12
+              %input#textinput.form-control.input-md{:name => "search_params", :placeholder => "Write here - e.g. kitty", :type => "text"}
+          .form-group
+            .col-md-12
+              %button#singlebutton.btn.btn-primary{:name => "singlebutton", type: "submit"}
+                Give me some photos!!!
+      %ul.pagination
+        %li.disabled
+          %a{:href => "#"} &laquo;
+        %li.active
+          %a{:href => "#"} 
+            1
+            %span.sr-only (current)
+        %li
+          %a{:href => "#"} 2
+        %li
+          %a{:href => "#"} 3
 
 - if @photos
-  .container
-    .row
-      - @photos.each do |photo|
-        .col-lg-4.col-sm-6.col-xs-12
-          %a{:href => "#"}
-            %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
-    
+  .row
+    - @photos.each do |photo|
+      .col-lg-2.col-sm-4.col-xs-12
+        %a{:href => "#"}
+          %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
+  
