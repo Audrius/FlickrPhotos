@@ -7,33 +7,17 @@ class HomeController < ApplicationController
   end
 
   def search_photos
-    search_params = params[:search_params]
+    # Default search string is kitty
+    params[:search_params] = 'kitty' if params[:search_params].nil?
     
-    # Default search
-    search_params = 'kitty' if search_params.empty?
-    
-    url = URI.parse(generate_url(search_params))
-    http = Net::HTTP.new url.host, url.port
-    http.use_ssl = true
-    ap url.request_uri
-    response = nil
-    http.start do |res|
-      response = JSON.parse(res.request_get(url.request_uri).body.to_s)
-    end
-
-    puts response
+    response = call_flickr_api(params[:search_params])
 
     @current_page = response['photos']['page']
     @total_pages  = response['photos']['pages']
     @photos_pages = response['photos']['perpage']
     @total_photos = response['photos']['total']
-
-    ap @total_photos
     @photos       = response['photos']['photo']
-      #ap photo
-      #@photos << photo
-    #end 
-    puts search_params  
+
     render :welcome
   end
 
@@ -59,5 +43,16 @@ class HomeController < ApplicationController
         url = add_parameter(url, key, value)      
       end
       return url
+    end
+
+    def call_flickr_api(search_params)
+      url = URI.parse(generate_url(search_params))
+      http = Net::HTTP.new url.host, url.port
+      http.use_ssl = true
+      response = nil
+      http.start do |res|
+        response = JSON.parse(res.request_get(url.request_uri).body.to_s)
+      end
+      return response
     end
 end
