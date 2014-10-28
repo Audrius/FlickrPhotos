@@ -9,4 +9,16 @@ RSpec.describe HomeController, :type => :controller do
     end
   end
 
+  describe "Search Settings" do
+
+  	it "should show settings window"
+  	it "should allow to change settings"
+
+  end
+
+  describe "Seach action" do
+  	it "allows to write multiply strings"
+  	
+  end
+
 end
