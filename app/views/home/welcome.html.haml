@@ -9,10 +9,11 @@
         %button#singlebutton.btn.btn-primary{:name => "singlebutton", type: "submit"} Button
 
 
-.container
-  .row
-    - @photos.each do |photo|
-      .col-lg-4.col-sm-6.col-xs-12
-        %a{:href => "#"}
-          %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
+- if @photos
+  .container
+    .row
+      - @photos.each do |photo|
+        .col-lg-4.col-sm-6.col-xs-12
+          %a{:href => "#"}
+            %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
     

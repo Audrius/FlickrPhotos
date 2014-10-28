@@ -2,9 +2,7 @@ class HomeController < ApplicationController
     
   URL_SERVICE = 'https://api.flickr.com/services/rest'
   METHOD = 'flickr.photos.search'
-  API_KEY = ''
-  MY_API_KEY = ''
-  MY_API_SECRET = ''
+  
   FORMAT = 'json'
 
   def welcome
@@ -13,7 +11,10 @@ class HomeController < ApplicationController
   def search_photos
     search_params = params[:search_params]
     
-    url = "#{URL_SERVICE}/?method=#{METHOD}&api_key=#{MY_API_KEY}&format=json&tags=#{search_params}&nojsoncallback=1&per_page=100&extras=url_z"
+    $my_api_key = ENV['MY_FL_KEY']
+
+    
+    url = "#{URL_SERVICE}/?method=#{METHOD}&api_key=#{$my_api_key}&format=json&tags=#{search_params}&nojsoncallback=1&per_page=100&extras=url_z"
     ##?api_key=#{@api_key}&method=#{method}"
     url = URI.parse(url)
     http = Net::HTTP.new url.host, url.port
