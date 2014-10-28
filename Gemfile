@@ -50,3 +50,4 @@ gem 'rubocop', require: false
 gem 'simplecov', :require => false, :group => :test
 gem 'rails_best_practices'
 gem 'quiet_assets', group: :development
+gem 'rails_12factor', group: :production
