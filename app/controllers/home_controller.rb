@@ -7,6 +7,9 @@ class HomeController < ApplicationController
   def welcome
   end
 
+  def view_search_settings
+  end
+
   def search_photos
     search_params = params[:search_params]
     
@@ -43,8 +46,14 @@ class HomeController < ApplicationController
     render :welcome
   end
 
- def update_search_settings
-end
+  def update_search_settings
+    SearchSettings.photos_per_page = params[:photos_per_page]
+    SearchSettings.privacy_filter  = params[:privacy_filter]
+    SearchSettings.safe_search     = params[:safe_search]
+    SearchSettings.content_type    = params[:content_type]
+    flash[:settings_saved] = "Settings saved!"
+    redirect_to :root
+  end
 
 
 end

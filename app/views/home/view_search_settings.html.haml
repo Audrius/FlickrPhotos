@@ -1,0 +1,27 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4
+      %legend Search settings
+      = form_tag '/update_search_settings', class: 'form' do
+        %table.table.table-striped
+          %thead
+            %tr
+              %th{style: "width:50%"} Type
+              %th Value
+          %tbody
+            %tr
+              %td Photos per page
+              %td= text_field_tag :photos_per_page, SearchSettings.photos_per_page, class: "input-large"
+            %tr
+              %td Privacy filter (1 - public)
+              %td= text_field_tag :privacy_filter, SearchSettings.privacy_filter, class: "input-large"
+            %tr
+              %td Safe search (1-safe)
+              %td= text_field_tag :safe_search, SearchSettings.safe_search, class: "input-large"
+            %tr
+              %td Content (7- all photos)
+              %td= text_field_tag :content_type, SearchSettings.content_type, class: "input-large"
+
+        = submit_tag "Save", class: 'btn btn-primary btn-md'
+        - if flash[:settings_saved]
+          = content_tag :div, flash[:settings_saved], style:"color:green"
