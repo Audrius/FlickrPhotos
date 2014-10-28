@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     $my_api_key = ENV['MY_FL_KEY']
 
 
-    url = "#{URL_SERVICE}/?method=#{METHOD}&api_key=#{$my_api_key}&format=json&text=#{search_params}&nojsoncallback=1&per_page=40&extras=o_dims"
+    url = "#{URL_SERVICE}/?method=#{METHOD}&api_key=#{$my_api_key}&format=json&text=#{search_params}&nojsoncallback=1&per_page=48&extras=o_dims"
     ##?api_key=#{@api_key}&method=#{method}"
     url = URI.parse(url)
     http = Net::HTTP.new url.host, url.port
@@ -30,6 +30,8 @@ class HomeController < ApplicationController
     @total_pages  = response['photos']['pages']
     @photos_pages = response['photos']['perpage']
     @total_photos = response['photos']['total']
+
+    ap @total_photos
     @photos       = response['photos']['photo']
       #ap photo
       #@photos << photo

@@ -1,3 +1,6 @@
+
+=render 'layouts/navigation_bar'
+
 .container
   .row
     .col-md-4.col-md-offset-4
@@ -25,8 +28,9 @@
 
 - if @photos
   .row
-    - @photos.each do |photo|
-      .col-lg-2.col-sm-4.col-xs-12
-        %a{:href => "#"}
-          %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
+    .col-lg-8.col-lg-offset-2
+      - @photos.each do |photo|
+        .col-lg-2.col-sm-4.col-xs-12
+          %a{:href => "#"}
+            %img.thumbnail.img-responsive{src: "#{get_photo_url(photo)}"}
   
