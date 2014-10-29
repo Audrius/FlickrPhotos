@@ -14,7 +14,6 @@ class HomeController < ApplicationController
     @search_value = 'kitty' if @search_value.blank?
     
     params[:page] = '1' if params[:page].blank?
-    
     response = call_flickr_api(@search_value, params[:page])
 
     @current_page = response['photos']['page']
@@ -45,7 +44,7 @@ class HomeController < ApplicationController
     def generate_url(search_params, page)
       url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1"
       url = add_parameter(url, 'api_key', ENV['MY_FL_KEY'])
-      url = add_parameter(url, 'text', search_params)
+      url = add_parameter(url, 'text', CGI::escape(search_params))
       url = add_parameter(url, 'page', page)
       SearchSettings.get_all.each do |key, value|
         url = add_parameter(url, key, value)      

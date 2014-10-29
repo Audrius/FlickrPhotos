@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the HomeHelper. For example:
-#
-# describe HomeHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe HomeHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Photo URL" do
+    it "should return valid URI" do
+      photo = {'server' => '3901', 'farm' => '4', 'secret' => 'db854383c1', 'id' => '15400818691'}
+      size = 'c'
+      url = URI.parse(get_photo_url(photo, size))
+      req = Net::HTTP.new(url.host, url.port)
+      req.use_ssl = true
+      res = req.request_head(url.path)
+      expect(res.code).to eql "200"
+    end
+  end
 end
