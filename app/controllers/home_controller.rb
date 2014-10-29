@@ -65,7 +65,7 @@ class HomeController < ApplicationController
 
     def get_pagination(current_page, total_pages)
       return 1, 9 if (current_page - 4) < 1
-      return current_page - 8, total_pages if current_page + 4 > total_pages 
+      return current_page - 8 + total_pages - current_page, total_pages  if current_page + 4 > total_pages 
       return current_page - 4, current_page + 4
     end
 end
